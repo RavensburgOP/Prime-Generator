@@ -8,6 +8,7 @@ import akka.http.scaladsl.model.{HttpEntity, ContentTypes}
 import akka.http.scaladsl.server.Directives._
 import scala.concurrent.Future
 import scala.io.StdIn
+import example.primestream.grpc._
 
 object PrimeProxy {
 
