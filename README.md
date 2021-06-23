@@ -55,3 +55,4 @@ This is not optimal either, but I think I can get it done quickly. If I have tim
 - Changed the generator so it uses recursion, which allows to stream the generated numbers and prevents the service from becoming unresponsive
 - Looking through the [Akka gRPC docs](https://doc.akka.io/docs/akka-grpc/current/client/details.html), it seems that the generated client will try to reconnect by default, so I can scratch that from my todo
 - Decided not to expand the number of gRPC functions, as it looks like the library itself takes care of many of those issues
+- I found a way to test the prime generator implementation, so I decided to implement a quick sanity check, so I don't have to manually test the code with `curl`. I could test the prime-proxy by mocking the generator service, but as I have no experience with mocking in Scala, I'll table this for now and maybe come back to it later
