@@ -11,24 +11,20 @@ import example.primestream.grpc._
 class PrimesImpl(implicit mat: Materializer) extends Primes {
   import mat.executionContext
 
-  def sieve(end: Long): Source[example.primestream.grpc.Response, NotUsed] = {
+  def sieve(stream: Stream[Int]): Stream[Int] =
+    stream.head #:: sieve(
+      stream.tail
+    ).filter(_ % stream.head != 0)
+
+  def prime_stream(
+      end: Long
+  ): Source[example.primestream.grpc.Response, NotUsed] = {
     require(end >= 2)
-    val odds = Stream.from(3, 2).takeWhile(_ <= Math.sqrt(end).toLong)
-    val composites =
-      odds.flatMap(i => Stream.from(i * i, 2 * i).takeWhile(_ <= end))
+    val start_stream = Stream.from(2)
+    val prime_stream = sieve(start_stream)
 
     Source(
-      // TODO: find a more elegant way to add 2 at the beginning of the sequence
-      //   TODO: This implementation will not return until all primes up to end has been found. Find a way to stream the results back as new prime numbers are found
-      Stream
-        .from(2)
-        .takeWhile(_ <= 2)
-        .concat(
-          Stream
-            .from(3, 2)
-            .takeWhile(_ <= end)
-            .diff(composites)
-        )
+      prime_stream.takeWhile(_ <= end)
     )
       .map(next_prime => Response(next_prime))
 
@@ -36,6 +32,6 @@ class PrimesImpl(implicit mat: Materializer) extends Primes {
 
   override def primeStream(in: Request): Source[Response, NotUsed] = {
     // TODO: introduce some kind of result caching
-    sieve(in.num)
+    prime_stream(in.num)
   }
 }
