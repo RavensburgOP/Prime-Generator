@@ -19,7 +19,6 @@ class PrimesImpl(implicit mat: Materializer) extends Primes {
   def prime_stream(
       end: Long
   ): Source[example.primestream.grpc.Response, NotUsed] = {
-    require(end >= 2)
     val start_stream = Stream.from(2)
     val prime_stream = sieve(start_stream)
 
