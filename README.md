@@ -44,10 +44,10 @@ This is not optimal either, but I think I can get it done quickly. If I have tim
 - Spent two hours on setting up a skeleton for the services and trying different stuff out. 1.5 of those hours was to figure out the build system and getting a `hello world` project spun up. I then changed the endpoint to match the task and had it reply with a list of prime number up to and including 17.
 - After an additional hour, I've persuaded the build system to find the correct folder with my gRPC `.proto` definitions. There's only one call defined, which gets prime numbers in a stream. I would like to circle back and see if I need to communicate any other information through a separate stream between the services - maybe some error messaging. I should circle back to this later
 [x] Check if there's a need for more gRPC function definitions (error messaging, health check, etc)
-- Since I have a minimal viable solution, I'm can move on to improving on it. There's a couple of things I'd like to get done:
+- Since I have a minimal viable solution, I'm can move on to improving on it. There's a couple of things I'd like to get figure out how to do:
     [ ] Error handling/recovery
     [x] Algorithm optimization (switch to lazy evaluation)
-    [ ] Testing (docs are not very helpful, so might just go for writing a simple sanity-check script)
+    [x] Testing (docs are not very helpful, so might just go for writing a simple sanity-check script)
 - I decided to start with error handling, since preventing crashes makes development easier. First I need to figure out, which crashes I can expect in Scala as I haven't used it outside of this assignment. I can see a couple of potential failure points, that I will need to confirm or reject:
   - Lost connection from proxy to prime service
   - Badly formatted request or response
