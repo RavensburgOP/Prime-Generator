@@ -9,7 +9,7 @@ Get all prime numbers up until and including a target number
 
 ## Design
 
-Here's an overview of my initial plans for the design. I'll try to keep a small log of my thoughts and describe changes from my original ideas in the [Worklog Section](## Worklog).
+Here's an overview of my initial plans for the design. I'll try to keep a small log of my thoughts and describe changes from my original ideas in the [Worklog Section](#Worklog).
 
 I've decided to implement the proxy-service and prime-number-server as separate projects. This is mostly due to this being what I'm used to in other languages.
 
