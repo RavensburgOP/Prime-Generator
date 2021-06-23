@@ -15,7 +15,7 @@ I've decided to implement the proxy-service and prime-number-server as separate 
 
 I've used the `Akka` framework, since I remember it being mentioned when I was reading documentation `Elixir` for a hobby project. The docs says it has support for `gRPC` as well, so I think it checks all the boxes I need.
 
-I'd like to be able to spin each service up as a `Docker` image and then use `docker-compose` to initiate the both services at the same time.
+I'd like to be able to spin each service up as a `Docker` image and then use `docker-compose` to initiate both services at the same time.
 
 I've got a combined five minutes of experience with `Scala` going into this, so most everything else in the stack was chosen because it was the top Google result for whatever I was looking for.
 
@@ -27,7 +27,7 @@ Since prime numbers can only be positive, I'd like to have the endpoint only acc
 
 It should be able to recover from the `prime-service` being unavailable and retry the connection, some kind of exponential backoff would probably be enough.
 
-### Prime-generator-service
+### Prime-service
 
 I'd like to implement some kind of lazy generator in the `prime-service`, do to the lower memory requirement. I think it might have a little bit of a performance overhead compared to calculating it all in one go, but I'll have to do some benchmarks to confirm.
 
@@ -37,7 +37,7 @@ If I get the caching/memoization working, the next step should probably be threa
 
 This would be wasteful, so I think a quick solution to this could be to have one process calculate new prime numbers up to the "highest" received `<number>` and then send a message to actors that are processing requests, whenever a new one is found.
 
-This is not optimal either, but I think I can get it done quickly. If I have time, I would like to try finding a way to have a function calculate new prime numbers and output them through a memoized generator. I don't know enough `Scala` to make a call on how this would work, but since it's has some FP-concepts I'm going to wager, memoization is possible.
+This is not optimal either, but I think I can get it done quickly. If I have time, I would like to try finding a way to have a function calculate new prime numbers and output them through a memoized generator. I don't know enough `Scala` to make a call on how this would work, but since it has some FP-concepts I'm going to wager, memoization is possible.
 
 ## Worklog
 
